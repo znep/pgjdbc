@@ -15,5 +15,6 @@ if test -x /bin/chcon ; then
     chcon -R -t svirt_sandbox_file_t ..
 fi
 
-docker run -e HOME=/git -u `id -u` -ti --rm -v `pwd`/..:/git praiskup/copr-and-jdbc-ci \
+docker run -e HOME=/git -e PARENT_VERSION  \
+    -u `id -u` -ti --rm -v `pwd`/..:/git:Z praiskup/copr-and-jdbc-ci \
     copr-ci-git /git/packaging/rpm postgresql-jdbc 9.5.git
