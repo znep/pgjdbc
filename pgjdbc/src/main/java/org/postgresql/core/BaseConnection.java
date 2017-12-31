@@ -190,6 +190,13 @@ public interface BaseConnection extends PGConnection, Connection {
    */
   LruCache<FieldMetadata.Key, FieldMetadata> getFieldMetadataCache();
 
+  /**
+   * Return whether the field metadata cache is enabled for this connection.
+   *
+   * @return true if the field metadata cache is enabled
+   */
+  boolean isFieldMetadataCacheEnabled();
+
   CachedQuery createQuery(String sql, boolean escapeProcessing, boolean isParameterized,
       String... columnNames)
       throws SQLException;

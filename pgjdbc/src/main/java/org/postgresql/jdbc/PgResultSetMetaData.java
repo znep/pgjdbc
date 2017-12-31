@@ -227,7 +227,7 @@ public class PgResultSetMetaData implements ResultSetMetaData, PGResultSetMetaDa
       return;
     }
 
-    if (populateFieldsWithCachedMetadata()) {
+    if (connection.isFieldMetadataCacheEnabled() && populateFieldsWithCachedMetadata()) {
       fieldInfoFetched = true;
       return;
     }

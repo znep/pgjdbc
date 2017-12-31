@@ -371,6 +371,22 @@ public abstract class BaseDataSource implements CommonDataSource, Referenceable 
   }
 
   /**
+   * @return true if database metadata cache is enabled
+   * @see PGProperty#DATABASE_METADATA_CACHE
+   */
+  public boolean getDatabaseMetadataCache() {
+    return PGProperty.DATABASE_METADATA_CACHE.getBoolean(properties);
+  }
+
+  /**
+   * @param databaseMetadataCache if column sanitizer should be enabled
+   * @see PGProperty#DATABASE_METADATA_CACHE
+   */
+  public void setDatabaseMetadataCache(boolean databaseMetadataCache) {
+    PGProperty.DATABASE_METADATA_CACHE.set(properties, databaseMetadataCache);
+  }
+
+  /**
    * @return database metadata cache fields size (number of fields cached per connection)
    * @see PGProperty#DATABASE_METADATA_CACHE_FIELDS
    */

@@ -141,6 +141,7 @@ public class PgConnection implements BaseConnection {
   private final boolean replicationConnection;
 
   private final LruCache<FieldMetadata.Key, FieldMetadata> fieldMetadataCache;
+  private final boolean enableFieldMetadataCache;
 
   final CachedQuery borrowQuery(String sql) throws SQLException {
     return queryExecutor.borrowQuery(sql);
@@ -324,6 +325,8 @@ public class PgConnection implements BaseConnection {
             Math.max(0, PGProperty.DATABASE_METADATA_CACHE_FIELDS.getInt(info)),
             Math.max(0, PGProperty.DATABASE_METADATA_CACHE_FIELDS_MIB.getInt(info) * 1024 * 1024),
         false);
+
+    enableFieldMetadataCache = PGProperty.DATABASE_METADATA_CACHE.getBoolean(info);
 
     replicationConnection = PGProperty.REPLICATION.get(info) != null;
   }
@@ -1136,6 +1139,11 @@ public class PgConnection implements BaseConnection {
   @Override
   public LruCache<FieldMetadata.Key, FieldMetadata> getFieldMetadataCache() {
     return fieldMetadataCache;
+  }
+
+  @Override
+  public boolean isFieldMetadataCacheEnabled() {
+    return enableFieldMetadataCache;
   }
 
   @Override

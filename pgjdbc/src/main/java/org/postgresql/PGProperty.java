@@ -102,16 +102,26 @@ public enum PGProperty {
       "Specifies the maximum size (in megabytes) of a per-connection prepared statement cache. A value of {@code 0} disables the cache."),
 
   /**
-   * Specifies the maximum number of fields to be cached per connection. A value of {@code 0} disables the cache.
+   * Use the per connection metadata field cache. This may need to be disabled if you have dynamic DDL calls.
    */
-  DATABASE_METADATA_CACHE_FIELDS("databaseMetadataCacheFields", "65536",
-          "Specifies the maximum number of fields to be cached per connection. A value of {@code 0} disables the cache."),
+  DATABASE_METADATA_CACHE("databaseMetadataCache", "true",
+      "Use the per connection metadata field cache. This may need to be disabled if you have dynamic DDL calls."),
 
   /**
-   * Specifies the maximum number of fields to be cached per connection. A value of {@code 0} disables the cache.
+   * Specifies the maximum number of fields to be cached per connection. This must be large enough to cache all
+   * the fields in a result set. To disable the cache, set {@code databaseMetadataCache} to {@code false}"),
+   */
+  DATABASE_METADATA_CACHE_FIELDS("databaseMetadataCacheFields", "65536",
+      "Specifies the maximum number of fields to be cached per connection. This must be large enough to cache all "
+          + "the fields in a result set. To disable the cache, set databaseMetadataCache to false"),
+
+  /**
+   * Specifies the maximum size (in megabytes) of fields to be cached per connection. This must be large enough to cache all
+   * the fields in a result set. To disable the cache, set {@code databaseMetadataCache} to {@code false}.
    */
   DATABASE_METADATA_CACHE_FIELDS_MIB("databaseMetadataCacheFieldsMiB", "5",
-          "Specifies the maximum size (in megabytes) of fields to be cached per connection. A value of {@code 0} disables the cache."),
+      "Specifies the maximum size (in megabytes) of fields to be cached per connection. This must be large enough to cache all "
+          + "the fields in a result set. To disable the cache, set databaseMetadataCache to false."),
 
   /**
    * Default parameter for {@link java.sql.Statement#getFetchSize()}. A value of {@code 0} means
